@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:flyte/screens/home_screen.dart';
 import 'package:flyte/widgets/welcome_page.dart';
 
 class InitialScreen extends StatefulWidget {
@@ -63,8 +64,7 @@ class _InitialScreenState extends State<InitialScreen> {
               headlineText: "and where products are first of its kind",
               buttonText: "Lets Browse Products",
               onClick: () {
-                _controller.nextPage(
-                    duration: Duration(milliseconds: 500), curve: Curves.ease);
+                Navigator.popAndPushNamed(context, HomeScreen.id);
               },
             ),
           ],
