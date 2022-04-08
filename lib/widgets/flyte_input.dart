@@ -9,16 +9,17 @@ class FlyteInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       decoration: InputDecoration(
+        hintText: "Search awesome products here...",
         prefixIcon: Icon(
           Icons.search,
-          color: Colors.black,
+          color: Color(0xff572504),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.black),
+          borderSide: BorderSide(color: Color(0xff572504)),
         ),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: Colors.black,
+            color: Color(0xff572504),
           ),
         ),
       ),

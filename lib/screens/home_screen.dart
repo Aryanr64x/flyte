@@ -5,10 +5,26 @@ import 'package:flutter/services.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flyte/widgets/flyte_input.dart';
 import 'package:flyte/widgets/product_card.dart';
+import 'package:flyte/widgets/product_list_page.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   static final String id = "home";
   HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int _currentIndex = 0;
+
+  List<Widget> pages = [
+    ProductListPage(),
+    Text("This is the shopping page"),
+    Text("This is the about us  page"),
+    Text("This is account info")
+  ];
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -34,28 +50,51 @@ class HomeScreen extends StatelessWidget {
             )
           ],
         ),
-        centerTitle: true,
-      ),
-      backgroundColor: Colors.white,
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: FlyteInput(),
-          ),
-          StaggeredGrid.count(
-            crossAxisCount: 2,
-            mainAxisSpacing: 12,
-            crossAxisSpacing: 12,
-            children: [
-              ProductCard(),
-              ProductCard(),
-              ProductCard(),
-              ProductCard(),
-            ],
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.account_circle_rounded,
+              color: Colors.black,
+            ),
           )
         ],
+        centerTitle: true,
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Color(0xff572504),
+        unselectedItemColor: Colors.white38,
+        selectedItemColor: Colors.white,
+        elevation: 10,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home_rounded,
+            ),
+            label: "Home",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.shopping_bag_rounded,
+            ),
+            label: "Bag",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.notifications_rounded,
+            ),
+            label: "Notifications",
+          ),
+        ],
+        onTap: (int index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        currentIndex: _currentIndex,
+      ),
+      backgroundColor: Colors.white,
+      body: pages.elementAt(_currentIndex),
     );
   }
 }
